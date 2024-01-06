@@ -1,0 +1,1191 @@
+--
+-- PostgreSQL database dump
+--
+-- Dumped from database version 14.5
+-- Dumped by pg_dump version 14.5
+-- Started on 2022-12-12 17:36:18
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+SET default_tablespace = '';
+SET default_table_access_method = heap;
+--
+-- TOC entry 212 (class 1259 OID 33266)
+-- Name: albums; Type: TABLE; Schema: public; Owner: postgres
+--
+CREATE TABLE public.albums (
+album_id bigint NOT NULL,
+album_name character varying(100),
+number_of_song_in_the_album integer,
+is_hit character varying(10),
+album_release_date date,
+album_artist character varying(100)
+);
+ALTER TABLE public.albums OWNER TO postgres;
+--
+-- TOC entry 211 (class 1259 OID 33265)
+-- Name: albums_album_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+CREATE SEQUENCE public.albums_album_id_seq
+START WITH 1
+INCREMENT BY 1
+NO MINVALUE
+NO MAXVALUE
+CACHE 1;
+ALTER TABLE public.albums_album_id_seq OWNER TO postgres;
+--
+-- TOC entry 3384 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: albums_album_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner:
+postgres
+--
+ALTER SEQUENCE public.albums_album_id_seq OWNED BY public.albums.album_id;
+--
+-- TOC entry 210 (class 1259 OID 33207)
+-- Name: genres; Type: TABLE; Schema: public; Owner: postgres
+--
+CREATE TABLE public.genres (
+genre_id bigint NOT NULL,
+genre_name character varying(20),
+number_of_songs integer,
+popular_artist character varying(50)
+);
+ALTER TABLE public.genres OWNER TO postgres;
+--
+-- TOC entry 209 (class 1259 OID 33206)
+-- Name: genres_genre_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+CREATE SEQUENCE public.genres_genre_id_seq
+START WITH 1
+INCREMENT BY 1
+NO MINVALUE
+NO MAXVALUE
+CACHE 1;
+ALTER TABLE public.genres_genre_id_seq OWNER TO postgres;
+--
+-- TOC entry 3387 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: genres_genre_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner:
+postgres
+--
+ALTER SEQUENCE public.genres_genre_id_seq OWNED BY public.genres.genre_id;
+--
+-- TOC entry 215 (class 1259 OID 33530)
+-- Name: hiphop_2021; Type: TABLE; Schema: public; Owner: postgres
+--
+CREATE TABLE public.hiphop_2021 (
+song_id bigint NOT NULL,
+album_id integer,
+genre_id bigint NOT NULL,
+song_name character varying(100),
+album_name character varying(100),
+artist_name character varying(100),
+length_of_song time without time zone,
+single_or_album character varying(10),
+number_of_times_played bigint,
+date_of_release date
+);
+ALTER TABLE public.hiphop_2021 OWNER TO postgres;
+--
+-- TOC entry 214 (class 1259 OID 33529)
+-- Name: hiphop_2021_genre_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+CREATE SEQUENCE public.hiphop_2021_genre_id_seq
+START WITH 1
+INCREMENT BY 1
+NO MINVALUE
+NO MAXVALUE
+CACHE 1;
+ALTER TABLE public.hiphop_2021_genre_id_seq OWNER TO postgres;
+--
+-- TOC entry 3390 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: hiphop_2021_genre_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner:
+postgres
+--
+ALTER SEQUENCE public.hiphop_2021_genre_id_seq OWNED BY
+public.hiphop_2021.genre_id;
+--
+-- TOC entry 213 (class 1259 OID 33528)
+-- Name: hiphop_2021_song_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+CREATE SEQUENCE public.hiphop_2021_song_id_seq
+START WITH 1
+INCREMENT BY 1
+NO MINVALUE
+NO MAXVALUE
+CACHE 1;
+ALTER TABLE public.hiphop_2021_song_id_seq OWNER TO postgres;
+--
+-- TOC entry 3392 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: hiphop_2021_song_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner:
+postgres
+--
+ALTER SEQUENCE public.hiphop_2021_song_id_seq OWNED BY public.hiphop_2021.song_id;
+--
+-- TOC entry 224 (class 1259 OID 33607)
+-- Name: kpop_2021; Type: TABLE; Schema: public; Owner: postgres
+--
+CREATE TABLE public.kpop_2021 (
+song_id bigint NOT NULL,
+album_id integer,
+genre_id bigint NOT NULL,
+song_name character varying(100),
+album_name character varying(100),
+artist_name character varying(100),
+length_of_song time without time zone,
+single_or_album character varying(10),
+number_of_times_played bigint,
+date_of_release date
+);
+ALTER TABLE public.kpop_2021 OWNER TO postgres;
+--
+-- TOC entry 223 (class 1259 OID 33606)
+-- Name: kpop_2021_genre_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+CREATE SEQUENCE public.kpop_2021_genre_id_seq
+START WITH 1
+INCREMENT BY 1
+NO MINVALUE
+NO MAXVALUE
+CACHE 1;
+ALTER TABLE public.kpop_2021_genre_id_seq OWNER TO postgres;
+--
+-- TOC entry 3395 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: kpop_2021_genre_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner:
+postgres
+--
+ALTER SEQUENCE public.kpop_2021_genre_id_seq OWNED BY public.kpop_2021.genre_id;
+--
+-- TOC entry 222 (class 1259 OID 33605)
+-- Name: kpop_2021_song_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+CREATE SEQUENCE public.kpop_2021_song_id_seq
+START WITH 1
+INCREMENT BY 1
+NO MINVALUE
+NO MAXVALUE
+CACHE 1;
+ALTER TABLE public.kpop_2021_song_id_seq OWNER TO postgres;
+--
+-- TOC entry 3397 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: kpop_2021_song_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner:
+postgres
+--
+ALTER SEQUENCE public.kpop_2021_song_id_seq OWNED BY public.kpop_2021.song_id;
+--
+-- TOC entry 218 (class 1259 OID 33568)
+-- Name: pop_2021; Type: TABLE; Schema: public; Owner: postgres
+--
+CREATE TABLE public.pop_2021 (
+song_id bigint NOT NULL,
+album_id integer,
+genre_id bigint NOT NULL,
+song_name character varying(100),
+album_name character varying(100),
+artist_name character varying(100),
+length_of_song time without time zone,
+single_or_album character varying(10),
+number_of_times_played bigint,
+date_of_release date
+);
+ALTER TABLE public.pop_2021 OWNER TO postgres;
+--
+-- TOC entry 217 (class 1259 OID 33567)
+-- Name: pop_2021_genre_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+CREATE SEQUENCE public.pop_2021_genre_id_seq
+START WITH 1
+INCREMENT BY 1
+NO MINVALUE
+NO MAXVALUE
+CACHE 1;
+ALTER TABLE public.pop_2021_genre_id_seq OWNER TO postgres;
+--
+-- TOC entry 3400 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: pop_2021_genre_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner:
+postgres
+--
+ALTER SEQUENCE public.pop_2021_genre_id_seq OWNED BY public.pop_2021.genre_id;
+--
+-- TOC entry 216 (class 1259 OID 33566)
+-- Name: pop_2021_song_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+CREATE SEQUENCE public.pop_2021_song_id_seq
+START WITH 1
+INCREMENT BY 1
+NO MINVALUE
+NO MAXVALUE
+CACHE 1;
+ALTER TABLE public.pop_2021_song_id_seq OWNER TO postgres;
+--
+-- TOC entry 3402 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: pop_2021_song_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner:
+postgres
+--
+ALTER SEQUENCE public.pop_2021_song_id_seq OWNED BY public.pop_2021.song_id;
+--
+-- TOC entry 221 (class 1259 OID 33588)
+-- Name: rock_alternative_2021; Type: TABLE; Schema: public; Owner: postgres
+--
+CREATE TABLE public.rock_alternative_2021 (
+song_id bigint NOT NULL,
+album_id integer,
+genre_id bigint NOT NULL,
+song_name character varying(100),
+album_name character varying(100),
+artist_name character varying(100),
+length_of_song time without time zone,
+single_or_album character varying(10),
+number_of_times_played bigint,
+date_of_release date
+);
+ALTER TABLE public.rock_alternative_2021 OWNER TO postgres;
+--
+-- TOC entry 220 (class 1259 OID 33587)
+-- Name: rock_alternative_2021_genre_id_seq; Type: SEQUENCE; Schema: public; Owner:
+postgres
+--
+CREATE SEQUENCE public.rock_alternative_2021_genre_id_seq
+START WITH 1
+INCREMENT BY 1
+NO MINVALUE
+NO MAXVALUE
+CACHE 1;
+ALTER TABLE public.rock_alternative_2021_genre_id_seq OWNER TO postgres;
+--
+-- TOC entry 3405 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: rock_alternative_2021_genre_id_seq; Type: SEQUENCE OWNED BY; Schema:
+public; Owner: postgres
+--
+ALTER SEQUENCE public.rock_alternative_2021_genre_id_seq OWNED BY
+public.rock_alternative_2021.genre_id;
+--
+-- TOC entry 219 (class 1259 OID 33586)
+-- Name: rock_alternative_2021_song_id_seq; Type: SEQUENCE; Schema: public; Owner:
+postgres
+--
+CREATE SEQUENCE public.rock_alternative_2021_song_id_seq
+START WITH 1
+INCREMENT BY 1
+NO MINVALUE
+NO MAXVALUE
+CACHE 1;
+ALTER TABLE public.rock_alternative_2021_song_id_seq OWNER TO postgres;
+--
+-- TOC entry 3407 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: rock_alternative_2021_song_id_seq; Type: SEQUENCE OWNED BY; Schema:
+public; Owner: postgres
+--
+ALTER SEQUENCE public.rock_alternative_2021_song_id_seq OWNED BY
+public.rock_alternative_2021.song_id;
+--
+-- TOC entry 3194 (class 2604 OID 33269)
+-- Name: albums album_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.albums ALTER COLUMN album_id SET DEFAULT
+nextval('public.albums_album_id_seq'::regclass);
+--
+-- TOC entry 3193 (class 2604 OID 33210)
+-- Name: genres genre_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.genres ALTER COLUMN genre_id SET DEFAULT
+nextval('public.genres_genre_id_seq'::regclass);
+--
+-- TOC entry 3195 (class 2604 OID 33533)
+-- Name: hiphop_2021 song_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.hiphop_2021 ALTER COLUMN song_id SET DEFAULT
+nextval('public.hiphop_2021_song_id_seq'::regclass);
+--
+-- TOC entry 3196 (class 2604 OID 33534)
+-- Name: hiphop_2021 genre_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.hiphop_2021 ALTER COLUMN genre_id SET DEFAULT
+nextval('public.hiphop_2021_genre_id_seq'::regclass);
+--
+-- TOC entry 3201 (class 2604 OID 33610)
+-- Name: kpop_2021 song_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.kpop_2021 ALTER COLUMN song_id SET DEFAULT
+nextval('public.kpop_2021_song_id_seq'::regclass);
+--
+-- TOC entry 3202 (class 2604 OID 33611)
+-- Name: kpop_2021 genre_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.kpop_2021 ALTER COLUMN genre_id SET DEFAULT
+nextval('public.kpop_2021_genre_id_seq'::regclass);
+--
+-- TOC entry 3197 (class 2604 OID 33571)
+-- Name: pop_2021 song_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.pop_2021 ALTER COLUMN song_id SET DEFAULT
+nextval('public.pop_2021_song_id_seq'::regclass);
+--
+-- TOC entry 3198 (class 2604 OID 33572)
+-- Name: pop_2021 genre_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.pop_2021 ALTER COLUMN genre_id SET DEFAULT
+nextval('public.pop_2021_genre_id_seq'::regclass);
+--
+-- TOC entry 3199 (class 2604 OID 33591)
+-- Name: rock_alternative_2021 song_id; Type: DEFAULT; Schema: public; Owner:
+postgres
+--
+ALTER TABLE ONLY public.rock_alternative_2021 ALTER COLUMN song_id SET DEFAULT
+nextval('public.rock_alternative_2021_song_id_seq'::regclass);
+--
+-- TOC entry 3200 (class 2604 OID 33592)
+-- Name: rock_alternative_2021 genre_id; Type: DEFAULT; Schema: public; Owner:
+postgres
+--
+ALTER TABLE ONLY public.rock_alternative_2021 ALTER COLUMN genre_id SET DEFAULT
+nextval('public.rock_alternative_2021_genre_id_seq'::regclass);
+--
+-- TOC entry 3365 (class 0 OID 33266)
+-- Dependencies: 212
+-- Data for Name: albums; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+COPY public.albums (album_id, album_name, number_of_song_in_the_album, is_hit,
+album_release_date, album_artist) FROM stdin;
+1 Hall of Fame 20 TRUE 2021-06-11 Polo G
+2 Shiesty Season 17 TRUE 2021-02-05 Pooh Shiesty
+3 Scary Hours 2 3 FALSE 2021-03-05 Drake
+4 Destined 2 Win 21 TRUE 2021-04-02 Lil Tjay
+5 The Melodic Blue 16 FALSE 2021-09-10 Baby Keem
+6 MONTERO 15 TRUE 2021-09-17 Lil Nas X
+7 Trip At Knight (Complete Edition) 18 TRUE 2021-08-21 Trippie Redd
+8 Something for Thee Hotties 21 FALSE 2021-10-29 Megan Thee Stallion
+9 A Gangsta's Pain 22 TRUE 2021-04-23 Moneybagg Yo
+10 KHALED KHALED 14 TRUE 2021-04-30 DJ Khaled
+11 The House Is Burning 16 FALSE 2021-07-30 Isaiah Rashad
+12 CALL ME IF YOU GET LOST 16 TRUE 2021-06-25 Tyler, The Creator
+13 Donda 27 TRUE 2021-08-29 Kanye West
+14 Slime Language 2 23 TRUE 2021-04-16 Young Stoner Life, Young Thug,
+Gunna
+15 The Off-Season 12 TRUE 2021-05-14 J. Cole
+16 Whole Lotta Red 24 TRUE 2020-12-25 Playboi Carti
+17 FOR CERTAIN 8 FALSE 2020-12-11 BIA
+18 Still Sleep? 14 TRUE 2021-06-02 Sleepy Hallow
+19 Beam Me Up Scotty 23 TRUE 2021-05-14 Nicki Minaj
+20 No Love Lost (Deluxe) 8 FALSE 2020-12-04 Blxst
+21 Certified Lover Boy 21 TRUE 2021-09-03 Drake
+22 The Voice 16 TRUE 2020-12-24 Lil Durk
+23 Free Dem Boyz 19 TRUE 2021-05-21 42 Dugg
+24 Punk 20 FALSE 2021-10-15 Young Thug
+25 Culture III 19 TRUE 2021-06-11 Migos
+26 The Voice of the Heroes 18 TRUE 2021-06-04 Lil Baby, Lil Durk
+27 Bonfidential Files 21 FALSE 2021-01-08 Cico P
+28 SoulFly 19 TRUE 2021-03-26 Rod Wave
+29 SOUR 11 TRUE 2021-05-21 Olivia Rodrigo
+30 Future Nostalgia 11 TRUE 2020-10-01 Dua Lipa
+31 Planet Her 14 TRUE 2021-04-09 Doja Cat
+32 Justice 16 TRUE 2021-03-19 Justin Bieber
+33 Dreamland 16 TRUE 2020-08-07 Glass Animals
+34 30 12 FALSE 2021-10-14 Adele
+35 Happier Than Ever 16 TRUE 2021-07-30 Billie Eilish
+36 An Evening With Silk Sonic 10 FALSE 2021-11-11 Bruno Mars,
+Anderson .Paak, Silk Sonic
+37 = 14 FALSE 2021-10-29 Ed Sheeran
+38 Chosen 7 FALSE 2017-12-08 Maneskin
+39 F*CK LOVE (SAVAGE) 15 TRUE 2020-11-06 The Kid LAROI
+40 When It's All Said And Done... Take Time 13 TRUE 2021-03-12 Giveon
+41 Red (Taylor's Version) 30 FALSE 2021-11-12 Taylor Swift
+42 Sin Miedo (del Amor y Otros Demonios) 13 FALSE 2020-12-04 Kali Uchis
+43 LALISA 2 FALSE 2021-09-10 LISA
+44 La 167 25 FALSE 2021-06-24 Farruko
+45 CKay The First 8 FALSE 2019-08-30 CKay
+46 Music Of The Spheres 12 FALSE 2021-09-24 Coldplay
+47 The Lockdown Sessions 16 FALSE 2021-08-13 Elton John
+48 The Prelude 6 FALSE 2020-07-17 Pink Sweat$
+49 THE ANXIETY 10 FALSE 2020-03-13 THE ANXIETY, WILLOW, Tyler Cole
+50 a study of the human experience volume one 6 FALSE 2021-08-13 GAYLE
+51 Dolls EP 6 FALSE 2021-05-14 Bella Poarch
+52 Made in Lagos 14 FALSE 2021-08-13 Wizkid
+53 Teatro d'ira - Vol. I 8 FALSE 2021-03-19 Maneskin
+54 lately I feel EVERYTHING 11 FALSE 2021-07-16 WILLOW
+55 Typhoons 11 FALSE 2021-04-30 Royal Blood
+56 Love Sux 12 FALSE 2022-02-25 Avril Lavigne
+57 Medicine At Midnight 9 FALSE 2021-02-05 Foo Fighters
+58 Blue Weekend 11 FALSE 2021-06-04 Wolf Alice
+59 Mercury - Acts 1 & 2 32 FALSE 2022-07-01 Imagine Dragons
+60 If I Can't Have Love, I Want Power 13 FALSE 2021-08-27 Halsey
+61 Ugly is Beautiful: Shorter, Thicker & Uglier (Deluxe)21 FALSE 2021-05-28
+Oliver Tree
+62 Fever Dream 5 FALSE 2022-10-28 Palaye Royale
+63 Seventeen Going Under (Deluxe) 3 FALSE 2021-10-08 Sam Fender
+64 Scaled And Icy 11 FALSE 2021-05-21 Twenty One Pilots
+65 The Atlas Underground Fire 12 FALSE 2021-10-15 Tom Morello
+66 Death By Rock And Roll 12 FALSE 2021-02-12 The Pretty Reckless
+67 Traps 12 FALSE 2021-11-23 Bloc Party
+68 A Real Good Person In A Real Bad Place 11 FALSE 2021-09-24 Des Rocs
+69 Flux 9 FALSE 2021-09-24 Poppy
+70 CRAWLER 14 FALSE 2021-11-12 IDLES
+71 searching for nirvana 7 FALSE 2021-06-04 Royal & the Serpent
+72 The Battle at Garden's Gate 12 FALSE 2021-04-16 Greta Van Fleet
+73 Created From Filth And Dust 12 FALSE 2021-04-23 Lilith Czar
+74 Child Of The State 12 FALSE 2021-05-21 Ayron Jones
+75 When You See Yourself 11 FALSE 2021-03-05 Kings of Leon
+76 I Don't Live Here Anymore 10 FALSE 2021-10-29 The War On Drugs
+77 Moral Panic (The Complete Edition) 11 FALSE 2021-10-29 Nothing But
+Thieves
+78 Seize the Power 8 FALSE 2021-07-15 YONAKA
+79 Party At The Cemetery 14 FALSE 2021-10-08 POORSTACY
+80 It Won't Always Be Like This 11 FALSE 2021-07-09 Inhaler
+81 Ain't It Tragic 11 FALSE 2021-09-17 Dead Sara
+82 Mammoth WVH 14 FALSE 2021-06-11 Mammoth WVH
+83 Proof 35 FALSE 2022-06-10 BTS
+84 BE 8 TRUE 2020-11-20 BTS
+85 THE ALBUM 8 TRUE 2020-10-02 BLACKPINK
+86 MAP OF THE SOUL : PERSONA 7 FALSE 2019-04-12 BTS
+87 Eyes Wide Open 13 FALSE 2020-10-26 TWICE
+88 MAP OF THE SOUL : 7 20 TRUE 2020-02-21 BTS
+89 Love Yourself: Answer 26 FALSE 2018-08-24 BTS
+90 GUESS WHO 6 FALSE 2021-04-30 ITZY
+91 We play 5 FALSE 2021-03-17 Weeekly
+92 SQUARE UP 4 FALSE 2018-06-15 BLACKPINK
+93 Love Yourself: Tear 11 FALSE 2018-05-18 BTS
+94 Taste of Love 6 FALSE 2021-06-11 TWICE
+95 BORDER : CARNIVAL 6 FALSE 2021-04-26 ENHYPEN
+96 The ReVe Festival' Finale 16 FALSE 2019-12-23 Red Velvet
+97 The Chaos Chapter: FREEZE 8 TRUE 2021-05-31 TOMORROW X TOGETHER
+98 Love Yourself: Her 9 FALSE 2017-09-18 BTS
+99 IT'z ME 7 FALSE 2020-03-09 ITZY
+100 D-2 10 FALSE 2020-05-22 Agust D
+101 GO LIVE 14 FALSE 2020-06-17 Stray Kids
+102 MAP OF THE SOUL: 7 ~ THE JOURNEY ~ 13 FALSE 2020-06-19 BTS
+103 FANCY YOU 6 FALSE 2019-04-22 TWICE
+0 \N \N \N \N \N
+\.
+--
+-- TOC entry 3363 (class 0 OID 33207)
+-- Dependencies: 210
+-- Data for Name: genres; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+COPY public.genres (genre_id, genre_name, number_of_songs, popular_artist) FROM
+stdin;
+1 Hip-Hop 50 Lil Durk
+2 Pop 50 Justin Bieber
+3 Rock/Alternative 50 Avril Lavigne, Travis Barker
+4 K-Pop 50 BTS
+\.
+--
+-- TOC entry 3368 (class 0 OID 33530)
+-- Dependencies: 215
+-- Data for Name: hiphop_2021; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+COPY public.hiphop_2021 (song_id, album_id, genre_id, song_name, album_name,
+artist_name, length_of_song, single_or_album, number_of_times_played,
+date_of_release) FROM stdin;
+1 1 1 RAPSTAR Hall of Fame Polo G 00:02:45 Album
+683627422 2021-06-11
+2 0 1 Up NULL Cardi B 00:02:36 Single 515466846 2021-
+02-05
+3 2 1 Back In Blood (feat. Lil Durk) Shiesty Season Pooh
+Shiesty, Lil Durk 00:03:04 Album 257560351 2021-02-05
+4 3 1 Wants and Needs (feat. Lil Baby) Scary Hours 2 Drake, Lil
+Baby 00:03:12 Album 523375635 2021-03-05
+5 4 1 Calling My Phone Destined 2 Win Lil Tjay, 6LACK 00:03:25
+Album 562380046 2021-04-02
+6 0 1 Best Friend (feat. Doja Cat) NULL Saweetie, Doja Cat
+00:02:35 Single 440617971 2021-04-23
+7 5 1 family ties (with Kendrick Lamar) The Melodic Blue Baby Keem,
+Kendrick Lamar 00:04:12 Album 367134551 2021-09-10
+8 6 1 INDUSTRY BABY (feat. Jack Harlow) MONTERO Lil Nas X, Jack
+Harlow 00:03:32 Album 1572224651 2021-09-17
+9 7 1 Miss The Rage (feat. Playboi Carti) Trip At Knight (Complete
+Edition) Trippie Redd, Playboi Carti 00:03:56 Album 360186161 2021-08-21
+10 8 1 Thot Shit Something for Thee Hotties Megan Thee Stallion
+00:03:04 Album 240920858 2021-10-29
+11 9 1 Time Today A Gangsta's Pain Moneybagg Yo 00:02:16 Album
+117990203 2021-04-23
+12 10 1 EVERY CHANCE I GET (feat. Lil Baby & Lil Durk) KHALED KHALED
+DJ Khaled, Lil Baby, Lil Durk 00:03:56 Album 208248780 2021-04-30
+13 11 1 Lay Wit Ya (feat. Duke Deuce) The House Is Burning Isaiah
+Rashad, Duke Deuce 00:03:22 Album 30562029 2021-07-30
+14 31 1 Need to Know Need to Know Doja Cat 00:03:30 Album
+901296978 2021-06-11
+15 12 1 WUSYANAME (feat. Youngboy Never Broke Again & Ty Dolla $ign)
+CALL ME IF YOU GET LOST Tyler\\, The Creator, YoungBoy Never Broke Again, Ty
+Dolla $ign 00:02:01 Album 194031585 2021-06-25
+16 13 1 Moon Donda Kanye West 00:02:36 Album 200767022 2021-08-29
+17 9 1 Wockesha A Gangsta's Pain Moneybagg Yo 00:03:00 Album
+105055933 2021-04-23
+18 3 1 Lemon Pepper Freestyle (feat. Rick Ross) Scary Hours 2 Drake,
+Rick Ross 00:06:23 Album 145628904 2021-03-05
+19 0 1 No More Parties - Remix NULL Coi Leray, Lil Durk 00:03:12
+Single 35354067 2021-02-19
+20 0 1 Beat Box 3 (feat. DaBaby) NULL SpotemGottem, DaBaby
+00:03:20 Single 94039267 2021-02-26
+21 14 1 Ski Slime Language 2 Young Stoner Life, Young Thug, Gunna
+00:02:32 Album 117963353 2021-04-16
+22 0 1 Ramen & OJ Ramen & OJ Joyner Lucas, Lil Baby 00:03:38 Album
+178309876 2021-04-30
+23 0 1 Over The Top (feat. Drake) NULL Smiley, Drake 00:02:33
+Single 120252144 2021-07-23
+24 15 1 m y . l i f e (with 21 Savage & Morray) The Off-Season J.
+Cole, 21 Savage, Morray 00:03:38 Album 250667902 2021-05-14
+25 0 1 Sharing Locations (feat. Lil Baby & Lil Durk) NULL Meek Mill,
+Lil Durk, Lil Baby 00:02:41 Single 125526456 2021-08-27
+26 4 1 Run It Up (feat. Offset & Moneybagg Yo) Destined 2 Win Lil
+Tjay, Offset, Moneybagg Yo 00:03:52 Album 253293362 2021-04-02
+27 16 1 Sky Whole Lotta Red Playboi Carti 00:03:13 Album
+368211781 2020-12-25
+28 0 1 Track Star Track Star Mooski 00:03:19 Album 84048701
+2021-02-09
+29 0 1 Opp Stoppa (feat. 21 Savage) NULL YBN Nahmir, 21 Savage
+00:02:15 Single 157494256 2021-01-22
+30 0 1 On Me NULL Lil Baby 00:02:15 Single 232063101 2020-
+12-04
+31 17 1 WHOLE LOTTA MONEY FOR CERTAIN BIA 00:02:36 Album 91474188
+2020-12-11
+32 18 1 2055 Still Sleep? Sleepy Hallow 00:02:03 Album
+488001620 2021-06-02
+33 19 1 Seeing Green (with Drake & Lil Wayne) Beam Me Up Scotty Nicki
+Minaj, Drake, Lil Wayne 00:05:39 Album 83945784 2021-05-14
+34 0 1 NEVER LEFT NULL Lil Tecca 00:02:48 Single 162025717
+2021-05-06
+35 20 1 Chosen (feat. Ty Dolla $ign) No Love Lost (Deluxe) Blxst, Tyga,
+Ty Dolla $ign 00:02:41 Album 303130059 2020-12-04
+36 0 1 What You Need NULL Don Toliver 00:03:37 Single
+80454871 2021-05-04
+37 21 1 Knife Talk (with 21 Savage ft. Project Pat) Certified Lover
+Boy Drake, 21 Savage, Project Pat 00:04:02 Album 458470902 2021-09-03
+38 22 1 Still Trappin' The Voice Lil Durk, King Von 00:02:52
+Album 120445127 2020-12-24
+39 0 1 Masterpiece NULL DaBaby 00:03:01 Single 144982565
+2021-01-15
+40 23 1 4 Da Gang (with Roddy Ricch) Free Dem Boyz 42 Dugg, Roddy
+Ricch 00:02:36 Album 143319705 2021-05-21
+41 0 1 Who Want Smoke?? (feat. G Herbo, Lil Durk & 21 Savage) NULL
+Nardo Wick, G Herbo, Lil Durk, 21 Savage 00:04:39 Single 149637324
+2021-10-08
+42 24 1 Bubbly (with Drake & Travis Scott) Punk Young Thug, Drake,
+Travis Scott 00:02:45 Album 107890475 2021-10-15
+43 0 1 too easy NULL Gunna, Future 00:02:18 Single
+97644464 2021-09-24
+44 25 1 Straightenin Culture III Migos 00:04:15 Album 107264423
+2021-06-11
+45 0 1 BIG PURR (Prrdd) (feat. Pooh Shiesty) NULL Coi Leray, Pooh
+Shiesty 00:01:56 Single 41398703 2021-03-26
+46 26 1 Hats Off (feat. Travis Scott) The Voice of the Heroes Lil Baby,
+Lil Durk, Travis Scott 00:04:17 Album 118425382 2021-06-04
+47 0 1 late at night NULL Roddy Ricch 00:02:54 Single
+188971394 2021-06-04
+48 27 1 Tampa Bonfidential Files Cico P 00:02:56 Album
+84161915 2021-01-08
+49 0 1 His & Hers (feat. Don Toliver, Lil Uzi Vert & Gunna) NULL
+Internet Money, Gunna, Don Toliver, Lil Uzi Vert 00:03:44 Single
+186295597 2021-05-13
+50 28 1 Richer (feat. Polo G) SoulFly Rod Wave, Polo G 00:03:10
+Album 100176939 2021-03-26
+\.
+--
+-- TOC entry 3377 (class 0 OID 33607)
+-- Dependencies: 224
+-- Data for Name: kpop_2021; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+COPY public.kpop_2021 (song_id, album_id, genre_id, song_name, album_name,
+artist_name, length_of_song, single_or_album, number_of_times_played,
+date_of_release) FROM stdin;
+1 83 4 Butter Proof BTS 00:02:44 Album 1024540079 2022-06-10
+2 84 4 Dynamite BE BTS 00:03:19 Album 1526090943 2020-11-20
+3 0 4 Permission to Dance NULL BTS 00:03:07 Single
+536646541 2021-07-23
+4 84 4 Life Goes On BE BTS 00:03:27 Album 554199082 2020-
+11-20
+5 85 4 How You Like That THE ALBUM BLACKPINK 00:03:02 Album
+702900345 2020-10-02
+6 86 4 Boy With Luv (feat. Halsey) MAP OF THE SOUL: PERSONA BTS,
+Halsey 00:03:49 Album 945103309 2019-04-12
+7 0 4 On The Ground R ROSE 00:02:48 Album 243214843 2021-
+03-12
+8 0 4 Film out NULL BTS 00:03:34 Single 210116249 2021-
+04-01
+9 43 4 MONEY LALISA LISA 00:02:48 Album 574555068 2021-09-10
+10 85 4 Ice Cream (with Selena Gomez) THE ALBUM BLACKPINK, Selena Gomez
+00:02:57 Album 458382276 2020-10-02
+11 85 4 Lovesick Girls THE ALBUM BLACKPINK 00:03:14 Album
+385047091 2020-10-02
+12 85 4 Pretty Savage THE ALBUM BLACKPINK 00:03:21 Album
+284179204 2020-10-02
+13 87 4 I CAN'T STOP ME Eyes Wide Open TWICE 00:03:25 Album
+279761363 2020-10-26
+14 0 4 Kill This Love NULL BLACKPINK 00:03:11 Single
+638646579 2019-04-05
+15 0 4 Gone R ROSE 00:03:27 Album 186233304 2021-03-12
+16 88 4 Filter MAP OF THE SOUL: 7 BTS 00:03:00 Album
+335614744 2020-02-21
+17 43 4 LALISA LALISA LISA 00:03:20 Album 260742352 2021-
+09-10
+18 84 4 Blue & Grey BE BTS 00:04:14 Album 212113669 2020-11-20
+19 88 4 ON MAP OF THE SOUL: 7 BTS 00:04:06 Album 372008664
+2020-02-21
+20 89 4 Euphoria Love Yourself Answer BTS 00:03:48 Album
+423643770 2018-08-24
+21 84 4 Telepathy BE BTS 00:03:22 Album 186474762 2020-11-20
+22 90 4 In the morning GUESS WHO ITZY 00:02:52 Album 152135229
+2021-04-30
+23 91 4 After School We play Weeekly 00:03:25 Album
+150486969 2021-03-17
+24 92 4 DDU-DU DDU-DU SQUARE UP BLACKPINK 00:03:31 Album
+545251731 2018-06-15
+25 93 4 FAKE LOVE Love Yourself Tear BTS 00:04:02 Album
+592507212 2018-05-18
+26 94 4 Alcohol-Free Taste of Love TWICE 00:03:30 Album
+159759459 2021-06-11
+27 95 4 FEVER BORDER:CARNIVAL ENHYPEN 00:02:52 Album 198088107
+2021-04-26
+28 96 4 Psycho The ReVe Festival: Finale Red Velvet 00:03:30
+Album 339046755 2019-12-23
+29 97 4 0X1=LOVESONG (I Know I Love You) feat. Seori The Chaos Chapter:
+FREEZE TOMORROW X TOGETHER 00:03:22 Album 163293136 2021-05-31
+30 0 4 Sweet Night NULL V 00:03:34 Single 264124765 2020-
+03-13
+31 84 4 Fly To My Room BE BTS 00:03:42 Album 160676597 2020-
+11-20
+32 98 4 DNA Love Yourself Her BTS 00:03:43 Album 525974294 2017-
+09-18
+33 88 4 Black Swan MAP OF THE SOUL: 7 BTS 00:03:18 Album
+363489135 2020-02-21
+34 84 4 Dis-ease BE BTS 00:03:59 Album 156794688 2020-11-20
+35 0 4 Butter - Megan Thee Stallion Remix NULL BTS, Megan Thee Stallion
+00:02:44 Single 137555704 2021-08-27
+36 0 4 Next Level NULL aespa 00:03:41 Single 165006679 2021-
+05-17
+37 0 4 Celebrity NULL IU 00:03:15 Single 116155804 2021-
+01-27
+38 99 4 WANNABE IT'z ME ITZY 00:03:11 Album 268776514 2020-
+03-09
+39 100 4 Daechwita D-2 Agust D 00:03:45 Album 218262651 2020-
+05-22
+40 84 4 Stay BE BTS 00:03:24 Album 159295556 2020-11-20
+41 95 4 Drunk-Dazed BORDER:CARNIVAL ENHYPEN 00:03:13 Album
+154842917 2021-04-26
+42 101 4 God's Menu GO LIVE Stray Kids 00:02:47 Album 215244089
+2020-06-17
+43 0 4 SOLO NULL JENNIE 00:02:49 Single 426340870 2018-
+11-12
+44 0 4 CRY FOR ME NULL TWICE 00:03:24 Single 137030332 2020-
+12-18
+45 102 4 Stay Gold MAP OF THE SOUL: 7 ~ THE JOURNEY ~ BTS 00:04:03
+Album 212039287 2020-06-19
+46 0 4 As If It's Your Last NULL BLACKPINK 00:03:33 Single
+416048052 2017-06-22
+47 103 4 FANCY FANCY YOU TWICE 00:03:33 Album 350633122 2019-04-22
+48 89 4 IDOL Love Yourself Answer BTS 00:03:42 Album 359882708
+2018-08-24
+49 97 4 Anti-Romantic The Chaos Chapter: FREEZE TOMORROW X
+TOGETHER 00:03:35 Album 141065534 2021-05-31
+50 98 4 MIC Drop (Steve Aoki Remix) - Full Length Edition Love
+Yourself Answer BTS, Steve Aoki 00:05:07 Album 258797911 2018-08-24
+\.
+--
+-- TOC entry 3371 (class 0 OID 33568)
+-- Dependencies: 218
+-- Data for Name: pop_2021; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+COPY public.pop_2021 (song_id, album_id, genre_id, song_name, album_name,
+artist_name, length_of_song, single_or_album, number_of_times_played,
+date_of_release) FROM stdin;
+1 0 2 STAY (with Justin Bieber) NULL The Kid LAROI, Justin Bieber
+00:02:21 Single 2219043379 2021-07-09
+2 29 2 drivers license SOUR Olivia Rodrigo 00:04:02 Album
+1633645496 2021-05-21
+3 30 2 Levitating (feat. DaBaby) Future Nostalgia Dua Lipa, DaBaby
+00:03:32 Album 1559796200 2020-10-01
+4 31 2 Kiss Me More (feat. SZA) Planet Her Doja Cat, SZA
+00:03:28 Album 1366687961 2021-04-09
+5 6 2 INDUSTRY BABY (feat. Jack Harlow) MONTERO Lil Nas X, Jack
+Harlow 00:03:32 Album 1573378049 2021-07-23
+6 32 2 Peaches (feat. Daniel Caesar & Giveon) Justice Justin
+Bieber, Daniel Caesar, Giveon 00:03:18 Album 1284810141 2021-03-19
+7 33 2 Heat Waves Dreamland Glass Animals 00:03:58 Album
+2111449586 2020-08-07
+8 29 2 good 4 u SOUR Olivia Rodrigo 00:02:58 Album 1662614789
+2021-05-21
+9 0 2 Good Days NULL SZA 00:04:39 Single 627822947 2020-
+12-25
+10 34 2 Easy On Me Easy On Me Adele 00:03:44 Album 1107894095 2021-
+10-14
+11 35 2 Happier Than Ever Happier Than Ever Billie Eilish 00:04:58
+Album 835577491 2021-07-30
+12 36 2 Leave The Door Open An Evening With Silk Sonic Bruno Mars,
+Anderson .Paak, Silk Sonic 00:04:02 Album 951361599 2021-11-11
+13 37 2 Bad Habits = Ed Sheeran 00:03:50 Album 1325288827 2021-
+10-29
+14 6 2 MONTERO (Call Me By Your Name) MONTERO Lil Nas X
+00:02:17 Album 1561390559 2021-09-17
+15 38 2 Beggin' Chosen Maneskin 00:03:31 Album 1180962958
+2017-12-08
+16 39 2 WITHOUT YOU F*CK LOVE (SAVAGE) The Kid LAROI 00:02:41
+Album 772086066 2020-11-06
+17 40 2 Heartbreak Anniversary When It's All Said And Done... Take Time
+Giveon 00:03:18 Album 787558163 2021-03-12
+18 41 2 All Too Well (10 Minute Version) (Taylor's Version) (From The
+Vault) Red (Taylor's Version) Taylor Swift 00:10:13 Album 416878777
+2021-11-12
+19 0 2 Save Your Tears (with Ariana Grande) (Remix) NULL The Weeknd,
+Ariana Grande 00:03:11 Single 943554021 2021-04-23
+20 0 2 Todo De Ti NULL Rauw Alejandro 00:03:19 Single
+1001687463 2021-05-20
+21 1 2 RAPSTAR Hall of Fame Polo G 00:02:45 Album
+684116231 2021-06-11
+22 42 2 telepatia Sin Miedo (del Amor y Otros Demonios) ∞ Kali Uchis
+00:02:40 Album 745484064 2020-12-04
+23 43 2 MONEY LALISA LISA 00:02:48 Album 574555068 2021-09-10
+24 31 2 Need to Know Planet Her Doja Cat 00:03:30 Album
+901911852 2021-06-25
+25 37 2 Shivers = Ed Sheeran 00:03:27 Album 1016934164 2021-
+10-29
+26 44 2 Pepas Pepas Farruko 00:04:47 Album 1105288792 2021-06-24
+27 0 2 Butter Proof BTS 00:02:44 Album 1024540079 2022-06-10
+28 0 2 Goosebumps - Remix NULL Travis Scott, HVME 00:02:42
+Single 575121346 2021-01-15
+29 0 2 Astronaut In The Ocean NULL Masked Wolf 00:02:12 Single
+1031421518 2021-01-06
+30 32 2 Hold On Hold On Justin Bieber 00:02:50 Album
+592281217 2021-03-05
+31 45 2 love nwantiti (ah ah ah) CKay The First CKay 00:02:25
+Album 590731994 2019-08-30
+32 46 2 My Universe Music of the Spheres Coldplay, BTS 00:03:48
+Album 810086423 2021-09-24
+33 0 2 The Business NULL Tiesto 00:02:44 Single
+942428049 2020-09-16
+34 0 2 Up NULL Cardi B 00:02:36 Single 515689163 2021-
+02-05
+35 47 2 Cold Heart - PNAU Remix The Lockdown Sessions Elton John, Dua
+Lipa, PNAU 00:03:22 Album 1238389294 2021-08-13
+36 0 2 Beautiful Mistakes (feat. Megan Thee Stallion) JORDI (Deluxe)
+Maroon 5, Megan Thee Stallion 00:03:47 Album 531133951 2021-06-11
+37 48 2 At My Worst The Prelude Pink Sweat$ 00:02:50 Album 491238131
+2020-07-17
+38 20 2 Chosen (feat. Ty Dolla $ign) No Love Lost (Deluxe) Blxst, Tyga,
+Ty Dolla $ign 00:02:41 Album 303345043 2020-12-04
+39 4 2 Calling My Phone Destined 2 Win Lil Tjay, 6LACK 00:03:25
+Album 562800869 2021-04-02
+40 0 2 Love Tonight - Edit NULL Shouse 00:04:01 Single
+257763548 2017-12-14
+41 0 2 Just for me NULL PinkPantheress 00:01:55 Single
+118373868 2021-08-13
+42 13 2 Hurricane Donda Kanye West 00:04:03 Album 291671623 2021-
+08-29
+43 49 2 Meet Me At Our Spot THE ANXIETY THE ANXIETY, WILLOW, Tyler
+Cole 00:02:42 Album 458244876 2020-03-13
+44 0 2 Best Friend (feat. Doja Cat) NULL Saweetie, Doja Cat
+00:02:35 Single 440859226 2021-01-07
+45 50 2 abcdefu a study of the human experience volume one GAYLE
+00:02:48 Album 844571682 2021-08-13
+46 51 2 Build a Bitch Dolls EP Bella Poarch 00:02:02 Album
+359638374 2021-05-14
+47 0 2 Girls Like Us NULL Zoe Wees 00:03:09 Single
+171925521 2021-01-12
+48 52 2 Essence (feat. Justin Bieber & Tems) Made in Lagos
+Wizkid, Justin Bieber, Tems 00:04:23 Album 100078702 2021-08-13
+49 18 2 2055 Still Sleep? Sleepy Hallow 00:02:03 Album
+488551340 2021-06-02
+50 0 2 Friday (feat. Mufasa & Hypeman) - Dopamine Re-Edit NULL Riton,
+Nightcrawlers, Mufasa & Hypeman, Dopamine 00:02:49 Single 761951651 2021-
+01-15
+\.
+--
+-- TOC entry 3374 (class 0 OID 33588)
+-- Dependencies: 221
+-- Data for Name: rock_alternative_2021; Type: TABLE DATA; Schema: public; Owner:
+postgres
+--
+COPY public.rock_alternative_2021 (song_id, album_id, genre_id, song_name,
+album_name, artist_name, length_of_song, single_or_album, number_of_times_played,
+date_of_release) FROM stdin;
+1 53 3 I WANNA BE YOUR SLAVE Teatro d'ira - Vol. I Maneskin
+00:02:53 Album 714567636 2021-03-19
+2 54 3 t r a n s p a r e n t s o u l feat. Travis Barker lately I
+feel EVERYTHING WILLOW, Travis Barker 00:02:48 Album 226517114 2021-07-16
+3 55 3 Oblivion Typhoons Royal Blood 00:02:41 Album 21493581
+2021-04-30
+4 0 3 DiE4u NULL Bring Me The Horizon 00:03:27 Single
+53808300 2021-09-16
+5 56 3 Bite Me Love Sux Avril Lavigne 00:02:39 Album
+73222370 2022-02-25
+6 57 3 Waiting On A War Medicine At Midnight Foo Fighters
+00:04:13 Album 33025584 2021-02-05
+7 0 3 Rain (from The Suicide Squad) NULL grandson, Jessie Reyez
+00:03:56 Single 33522095 2021-06-22
+8 0 3 Wake Me Up NULL Foals 00:04:23 Single 15194949 2021-
+11-04
+9 0 3 hollywood sucks// NULL KennyHoopla, Travis Barker 00:02:33
+Single 14929692 2021-05-07
+10 58 3 Smile Blue Weekend Wolf Alice 00:03:16 Album 19997395
+2021-06-04
+11 0 3 Taking Me Back NULL Jack White 00:04:05 Single
+10978800 2021-10-18
+12 59 3 Wrecked Mercury - Acts 1 & 2 Imagine Dragons 00:04:04
+Album 207133949 2022-07-01
+13 60 3 honey If I Can't Have Love, I Want Power Halsey 00:02:53
+Album 22812718 2021-08-27
+14 0 3 fleabag NULL YUNGBLUD 00:02:56 Single 26420803
+2021-08-19
+15 61 3 Life Goes On Ugly is Beautiful: Shorter, Thicker & Uglier
+(Deluxe) Oliver Tree 00:02:41 Album 430057641 2021-05-28
+16 62 3 No Love In LA Fever Dream Palaye Royale 00:03:22 Album
+16618143 2022-10-28
+17 0 3 she knows it NULL Maggie Lindemann 00:02:36 Single
+18356815 2021-10-29
+18 0 3 Paralyzed NULL Sueco 00:02:43 Single 90932919 2021-
+08-13
+19 0 3 Vertigo NULL Alice Merton 00:03:05 Single
+15233310 2021-04-08
+20 63 3 Seventeen Going Under Seventeen Going Under (Deluxe) Sam
+Fender 00:04:57 Album 130700866 2021-10-08
+21 64 3 Shy Away Scaled And Icy Twenty One Pilots 00:02:55 Album
+143729003 2021-05-21
+22 0 3 papercuts NULL Machine Gun Kelly 00:03:00 Single
+55229260 2021-08-12
+23 0 3 Flames (feat. Avril Lavigne) NULL MOD SUN, Avril Lavigne
+00:02:31 Single 45472605 2021-01-08
+24 65 3 Let's Get The Party Started (feat. Bring Me The Horizon) The
+Atlas Underground Fire Tom Morello, Bring Me The Horizon 00:03:32 Album
+12126131 2021-10-15
+25 66 3 And So It Went [Feat. Tom Morello] Death By Rock And Roll The
+Pretty Reckless, Tom Morello 00:04:30 Album 13648857 2021-02-12
+26 0 3 Traps NULL Bloc Party 00:02:54 Single 5514908 2021-
+11-23
+27 68 3 Hanging by a Thread A Real Good Person In A Real Bad Place
+Des Rocs 00:03:18 Album 2828887 2021-09-24
+28 69 3 Her Flux Poppy 00:02:08 Album 7986174 2021-09-24
+29 70 3 The Beachland Ballroom CRAWLER IDLES 00:04:00 Album
+8541866 2021-11-12
+30 0 3 Freaks NULL Surf Curse 00:02:27 Single 627542085
+2021-05-15
+31 71 3 i can't get high searching for nirvana Royal & the Serpent
+00:03:08 Album 9886361 2021-06-04
+32 72 3 My Way, Soon The Battle at Garden's Gate Greta Van Fleet
+00:04:15 Album 23060355 2021-04-16
+33 73 3 Anarchy Created From Filth And Dust Lilith Czar 00:03:54
+Album 4573516 2021-04-23
+34 0 3 Start The Healing NULL Korn 00:03:28 Single 12959537
+2021-11-11
+35 74 3 Mercy Child Of The State Ayron Jones 00:03:25 Album
+4456051 2021-05-21
+36 75 3 The Bandit When You See Yourself Kings of Leon 00:04:10
+Album 32533158 2021-03-05
+37 76 3 I Don't Live Here Anymore (feat. Lucius) I Don't Live Here
+Anymore The War On Drugs, Lucius 00:05:27 Album 17700282 2021-10-29
+38 77 3 Futureproof Moral Panic (The Complete Edition) Nothing But
+Thieves 00:03:27 Album 17467897 2021-10-29
+39 78 3 Seize the Power Seize the Power YONAKA 00:02:41 Album
+24422281 2021-07-15
+40 0 3 Kill The Noise NULL Papa Roach 00:03:08 Single
+30680214 2021-09-09
+41 0 3 deathwish (feat. nothing,nowhere.) NULL Stand Atlantic,
+nothing\\,nowhere. 00:02:27 Single 23947624 2021-04-29
+42 50 3 abcdefu a study of the human experience volume one GAYLE
+00:02:48 Album 844571682 2021-08-13
+43 0 3 Palm Reader Palm Reader DREAMERS, Big Boi, UPSAHL 00:03:00
+Album 12275166 2021-03-05
+44 0 3 i hope ur miserable until ur dead pretty poison Nessa
+Barrett 00:02:57 Album 97964385 2021-08-06
+45 79 3 Party At The Cemetery Party At The Cemetery POORSTACY
+00:02:06 Album 3571477 2021-10-08
+46 80 3 In My Sleep It Won't Always Be Like This Inhaler 00:04:11
+Album 2865654 2021-07-09
+47 81 3 Heroes Ain't It Tragic Dead Sara 00:03:16 Album 970118
+2021-09-17
+48 82 3 Don't Back Down Mammoth WVH Mammoth WVH 00:03:45 Album
+8901255 2021-06-11
+49 0 3 Don't Hate Me This Is How The World Ends Badflower
+00:04:11 Album 7714719 2021-09-24
+50 0 3 Control NULL Mannequin Pussy 00:03:15 Single
+2387785 2021-03-23
+\.
+--
+-- TOC entry 3409 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: albums_album_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+SELECT pg_catalog.setval('public.albums_album_id_seq', 1, false);
+--
+-- TOC entry 3410 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: genres_genre_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+SELECT pg_catalog.setval('public.genres_genre_id_seq', 4, true);
+--
+-- TOC entry 3411 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: hiphop_2021_genre_id_seq; Type: SEQUENCE SET; Schema: public; Owner:
+postgres
+--
+SELECT pg_catalog.setval('public.hiphop_2021_genre_id_seq', 1, false);
+--
+-- TOC entry 3412 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: hiphop_2021_song_id_seq; Type: SEQUENCE SET; Schema: public; Owner:
+postgres
+--
+SELECT pg_catalog.setval('public.hiphop_2021_song_id_seq', 1, false);
+--
+-- TOC entry 3413 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: kpop_2021_genre_id_seq; Type: SEQUENCE SET; Schema: public; Owner:
+postgres
+--
+SELECT pg_catalog.setval('public.kpop_2021_genre_id_seq', 1, false);
+--
+-- TOC entry 3414 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: kpop_2021_song_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+SELECT pg_catalog.setval('public.kpop_2021_song_id_seq', 1, false);
+--
+-- TOC entry 3415 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: pop_2021_genre_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+SELECT pg_catalog.setval('public.pop_2021_genre_id_seq', 1, false);
+--
+-- TOC entry 3416 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: pop_2021_song_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+SELECT pg_catalog.setval('public.pop_2021_song_id_seq', 1, false);
+--
+-- TOC entry 3417 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: rock_alternative_2021_genre_id_seq; Type: SEQUENCE SET; Schema: public;
+Owner: postgres
+--
+SELECT pg_catalog.setval('public.rock_alternative_2021_genre_id_seq', 1, false);
+--
+-- TOC entry 3418 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: rock_alternative_2021_song_id_seq; Type: SEQUENCE SET; Schema: public;
+Owner: postgres
+--
+SELECT pg_catalog.setval('public.rock_alternative_2021_song_id_seq', 1, false);
+--
+-- TOC entry 3206 (class 2606 OID 33271)
+-- Name: albums album_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.albums
+ADD CONSTRAINT album_key PRIMARY KEY (album_id);
+--
+-- TOC entry 3204 (class 2606 OID 33212)
+-- Name: genres genres_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.genres
+ADD CONSTRAINT genres_key PRIMARY KEY (genre_id);
+--
+-- TOC entry 3208 (class 2606 OID 33536)
+-- Name: hiphop_2021 hiphop_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.hiphop_2021
+ADD CONSTRAINT hiphop_key PRIMARY KEY (song_id);
+--
+-- TOC entry 3214 (class 2606 OID 33613)
+-- Name: kpop_2021 kpop_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.kpop_2021
+ADD CONSTRAINT kpop_key PRIMARY KEY (song_id);
+--
+-- TOC entry 3210 (class 2606 OID 33574)
+-- Name: pop_2021 pop_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.pop_2021
+ADD CONSTRAINT pop_key PRIMARY KEY (song_id);
+--
+-- TOC entry 3212 (class 2606 OID 33594)
+-- Name: rock_alternative_2021 rock_alt_key; Type: CONSTRAINT; Schema: public;
+Owner: postgres
+--
+ALTER TABLE ONLY public.rock_alternative_2021
+ADD CONSTRAINT rock_alt_key PRIMARY KEY (song_id);
+--
+-- TOC entry 3216 (class 2606 OID 33542)
+-- Name: hiphop_2021 hiphop_afkey; Type: FK CONSTRAINT; Schema: public; Owner:
+postgres
+--
+ALTER TABLE ONLY public.hiphop_2021
+ADD CONSTRAINT hiphop_afkey FOREIGN KEY (album_id) REFERENCES
+public.albums(album_id);
+--
+-- TOC entry 3215 (class 2606 OID 33537)
+-- Name: hiphop_2021 hiphop_gfkey; Type: FK CONSTRAINT; Schema: public; Owner:
+postgres
+--
+ALTER TABLE ONLY public.hiphop_2021
+ADD CONSTRAINT hiphop_gfkey FOREIGN KEY (genre_id) REFERENCES
+public.genres(genre_id);
+--
+-- TOC entry 3222 (class 2606 OID 33619)
+-- Name: kpop_2021 kpop_afkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.kpop_2021
+ADD CONSTRAINT kpop_afkey FOREIGN KEY (album_id) REFERENCES
+public.albums(album_id);
+--
+-- TOC entry 3221 (class 2606 OID 33614)
+-- Name: kpop_2021 kpop_gfkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.kpop_2021
+ADD CONSTRAINT kpop_gfkey FOREIGN KEY (genre_id) REFERENCES
+public.genres(genre_id);
+--
+-- TOC entry 3218 (class 2606 OID 33580)
+-- Name: pop_2021 pop_afkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.pop_2021
+ADD CONSTRAINT pop_afkey FOREIGN KEY (album_id) REFERENCES
+public.albums(album_id);
+--
+-- TOC entry 3217 (class 2606 OID 33575)
+-- Name: pop_2021 pop_gfkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+ALTER TABLE ONLY public.pop_2021
+ADD CONSTRAINT pop_gfkey FOREIGN KEY (genre_id) REFERENCES
+public.genres(genre_id);
+--
+-- TOC entry 3220 (class 2606 OID 33600)
+-- Name: rock_alternative_2021 rock_alt_afkey; Type: FK CONSTRAINT; Schema: public;
+Owner: postgres
+--
+ALTER TABLE ONLY public.rock_alternative_2021
+ADD CONSTRAINT rock_alt_afkey FOREIGN KEY (album_id) REFERENCES
+public.albums(album_id);
+--
+-- TOC entry 3219 (class 2606 OID 33595)
+-- Name: rock_alternative_2021 rock_alt_gfkey; Type: FK CONSTRAINT; Schema: public;
+Owner: postgres
+--
+ALTER TABLE ONLY public.rock_alternative_2021
+ADD CONSTRAINT rock_alt_gfkey FOREIGN KEY (genre_id) REFERENCES
+public.genres(genre_id);
+--
+-- TOC entry 3383 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: TABLE albums; Type: ACL; Schema: public; Owner: postgres
+--
+GRANT ALL ON TABLE public.albums TO pg_database_owner WITH GRANT OPTION;
+--
+-- TOC entry 3385 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: SEQUENCE albums_album_id_seq; Type: ACL; Schema: public; Owner: postgres
+--
+GRANT ALL ON SEQUENCE public.albums_album_id_seq TO pg_database_owner WITH GRANT
+OPTION;
+--
+-- TOC entry 3386 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: TABLE genres; Type: ACL; Schema: public; Owner: postgres
+--
+GRANT ALL ON TABLE public.genres TO pg_database_owner WITH GRANT OPTION;
+--
+-- TOC entry 3388 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: SEQUENCE genres_genre_id_seq; Type: ACL; Schema: public; Owner: postgres
+--
+GRANT ALL ON SEQUENCE public.genres_genre_id_seq TO pg_database_owner WITH GRANT
+OPTION;
+--
+-- TOC entry 3389 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: TABLE hiphop_2021; Type: ACL; Schema: public; Owner: postgres
+--
+GRANT ALL ON TABLE public.hiphop_2021 TO pg_database_owner WITH GRANT OPTION;
+--
+-- TOC entry 3391 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: SEQUENCE hiphop_2021_genre_id_seq; Type: ACL; Schema: public; Owner:
+postgres
+--
+GRANT ALL ON SEQUENCE public.hiphop_2021_genre_id_seq TO pg_database_owner WITH
+GRANT OPTION;
+--
+-- TOC entry 3393 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: SEQUENCE hiphop_2021_song_id_seq; Type: ACL; Schema: public; Owner:
+postgres
+--
+GRANT ALL ON SEQUENCE public.hiphop_2021_song_id_seq TO pg_database_owner WITH
+GRANT OPTION;
+--
+-- TOC entry 3394 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: TABLE kpop_2021; Type: ACL; Schema: public; Owner: postgres
+--
+GRANT ALL ON TABLE public.kpop_2021 TO pg_database_owner WITH GRANT OPTION;
+--
+-- TOC entry 3396 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: SEQUENCE kpop_2021_genre_id_seq; Type: ACL; Schema: public; Owner:
+postgres
+--
+GRANT ALL ON SEQUENCE public.kpop_2021_genre_id_seq TO pg_database_owner WITH GRANT
+OPTION;
+--
+-- TOC entry 3398 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: SEQUENCE kpop_2021_song_id_seq; Type: ACL; Schema: public; Owner: postgres
+--
+GRANT ALL ON SEQUENCE public.kpop_2021_song_id_seq TO pg_database_owner WITH GRANT
+OPTION;
+--
+-- TOC entry 3399 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: TABLE pop_2021; Type: ACL; Schema: public; Owner: postgres
+--
+GRANT ALL ON TABLE public.pop_2021 TO pg_database_owner WITH GRANT OPTION;
+--
+-- TOC entry 3401 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: SEQUENCE pop_2021_genre_id_seq; Type: ACL; Schema: public; Owner: postgres
+--
+GRANT ALL ON SEQUENCE public.pop_2021_genre_id_seq TO pg_database_owner WITH GRANT
+OPTION;
+--
+-- TOC entry 3403 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: SEQUENCE pop_2021_song_id_seq; Type: ACL; Schema: public; Owner: postgres
+--
+GRANT ALL ON SEQUENCE public.pop_2021_song_id_seq TO pg_database_owner WITH GRANT
+OPTION;
+--
+-- TOC entry 3404 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: TABLE rock_alternative_2021; Type: ACL; Schema: public; Owner: postgres
+--
+GRANT ALL ON TABLE public.rock_alternative_2021 TO pg_database_owner WITH GRANT
+OPTION;
+--
+-- TOC entry 3406 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: SEQUENCE rock_alternative_2021_genre_id_seq; Type: ACL; Schema: public;
+Owner: postgres
+--
+GRANT ALL ON SEQUENCE public.rock_alternative_2021_genre_id_seq TO
+pg_database_owner WITH GRANT OPTION;
+--
+-- TOC entry 3408 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: SEQUENCE rock_alternative_2021_song_id_seq; Type: ACL; Schema: public;
+Owner: postgres
+--
+GRANT ALL ON SEQUENCE public.rock_alternative_2021_song_id_seq TO pg_database_owner
+WITH GRANT OPTION;
+-- Completed on 2022-12-12 17:36:18
+--
+-- PostgreSQL database dump complete
